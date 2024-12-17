@@ -20,7 +20,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:text="@string/fitcheck"
-        android:textSize="24sp"
+        android:textSize="30sp"
+        android:fontFamily="@font/inter_semibold"
         android:textColor="@color/black"
         android:visibility="visible" />
 
@@ -31,7 +32,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:text="@string/your_fitness_comes_first"
-        android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/orange"
         android:visibility="invisible" />
 </FrameLayout>
