@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Team-15_CTIS-487</string>
     <string name="fitcheck">FitCheck</string>
-    <string name="your_fitness_comes_first">Your Fitness Comes First</string>
+    <string name="stay_healthy">Stay Healthy</string>
+    <string name="hero_description">Easily calculate your Body Mass Index (BMI) to understand your health status. Just enter your details to get started!</string>
+    <string name="check_now">Check Now</string>
 </resources>

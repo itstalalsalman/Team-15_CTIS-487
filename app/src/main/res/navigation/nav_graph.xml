@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.team_15_ctis_487.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/activity_home_fragment" />
+
+    <fragment
+        android:id="@+id/trackWorkout"
+        android:name="com.example.team_15_ctis_487.TrackWorkoutFragment"
+        android:label="Track"
+        tools:layout="@layout/activity_track_workout_fragment" />
+
+    <fragment
+        android:id="@+id/nutrition"
+        android:name="com.example.team_15_ctis_487.NutritionFragment"
+        android:label="Nutrition"
+        tools:layout="@layout/activity_nutrition_fragment" />
+
+    <fragment
+        android:id="@+id/goals"
+        android:name="com.example.team_15_ctis_487.GoalsFragment"
+        android:label="Goals"
+        tools:layout="@layout/activity_goals_fragment" />
+</navigation>
