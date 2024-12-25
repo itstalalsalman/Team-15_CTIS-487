@@ -18,14 +18,14 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-        <ImageView
-            android:id="@+id/center_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/fitcheck"
-            android:contentDescription="Logo"
-            android:layout_gravity="center"
-            android:layout_marginStart="-30sp"/>
+            <ImageView
+                android:id="@+id/center_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/fitcheck"
+                android:contentDescription="Logo"
+                android:layout_gravity="center"
+                android:layout_marginStart="-30sp"/>
 
             <TextView
                 android:layout_width="36dp"

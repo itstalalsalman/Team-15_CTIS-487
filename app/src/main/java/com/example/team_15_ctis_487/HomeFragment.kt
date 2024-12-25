@@ -1,5 +1,6 @@
 package com.example.team_15_ctis_487
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = ActivityHomeFragmentBinding.inflate(inflater, container, false)
+
+        binding.btnCheckBMI.setOnClickListener {
+            val intent = Intent(requireContext(), BMICheckingActivity::class.java)
+            startActivity(intent)
+        }
+
         return binding.root
     }
 

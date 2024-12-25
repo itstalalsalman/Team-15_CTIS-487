@@ -24,6 +24,5 @@
             android:id="@+id/goals"
             android:enabled="true"
             android:icon="@drawable/goals"
-            android:title="Goals"
-            />
+            android:title="Goals" />
 </menu>

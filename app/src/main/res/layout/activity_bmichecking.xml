@@ -1,0 +1,236 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#FFFFFF"
+    android:id="@+id/bmi_main"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+        <!-- Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/center_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/fitcheck"
+                android:contentDescription="Logo"
+                android:layout_gravity="center"
+                android:layout_marginStart="-30sp"/>
+
+            <TextView
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Fit"
+                android:textColor="@color/black"
+                android:layout_marginStart="-15sp"
+                android:textSize="25sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="95sp"
+                android:layout_height="wrap_content"
+                android:text="Check"
+                android:textSize="28sp"
+                android:textStyle="italic"
+                android:layout_marginStart="-5sp"
+                android:textColor="@color/orange"
+                android:fontFamily="@font/inter_semibold"/>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/linearLayout_goals"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:cardCornerRadius="15dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/bmi_calc_img"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi"
+                    android:textSize="50sp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/orange"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10sp"/>
+
+                <TextView
+                    android:layout_width="200sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculator"
+                    android:textSize="40sp"
+                    android:textStyle="italic"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Weight Input -->
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="-"
+            android:hint="@string/enter_your_weight_kg"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/orange"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="20sp"/>
+
+        <!-- Height Input -->
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="-"
+            android:hint="@string/enter_your_height_cm"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:backgroundTint="@color/black"
+            android:textColor="#000000"
+            android:textColorHint="@color/orange"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Calculate Button -->
+
+        <!-- BMI Result -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnClose"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Go to Home"
+                android:fontFamily="@font/inter_semibold"
+                android:textSize="18sp"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/btnCalculateBMI"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/orange"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/calculate"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/btnGoals"
+                android:layout_marginStart="10sp"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:fontFamily="@font/inter_semibold"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:text="@string/goals"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="15sp">
+
+            <TextView
+                android:id="@+id/tvBMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Your BMI: "
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvBMIResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/orange"
+                android:textSize="30sp"
+                android:textStyle="italic"/>
+        </LinearLayout>
+
+        <!-- SeekBar to Show BMI Range -->
+        <SeekBar
+            android:id="@+id/seekBarBMI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:enabled="false"
+            android:max="40"
+            android:progress="0"
+            android:progressTint="#FF9800"
+            android:thumb="@android:color/transparent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvBMICat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="BMI Category: "
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvBMICategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/orange"
+                android:textSize="25sp"
+                android:textStyle="italic"/>
+
+        </LinearLayout>
+
+        <!-- BMI Category -->
+
+    </LinearLayout>
+</ScrollView>

@@ -4,4 +4,24 @@
     <string name="stay_healthy">Stay Healthy</string>
     <string name="hero_description">Easily calculate your Body Mass Index (BMI) to understand your health status. Just enter your details to get started!</string>
     <string name="check_now">Check Now</string>
+    <string name="check">Check</string>
+    <string name="your">Your</string>
+    <string name="bmi">BMI</string>
+    <string name="track">Track</string>
+    <string name="workout">Workout</string>
+    <string name="homeExerciseDescription">Log your exercises and track progress.</string>
+    <string name="btnSeeLift">See your Lifts</string>
+    <string name="homeNutritionCheck">Log your nutrition and track progress.</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="btnBeNutritious">Be Nutritious</string>
+    <string name="customNutritionHome">Customized Workout and Nutrition For Your Goals</string>
+    <string name="btnGetStarted">Get Started</string>
+    <string name="fitness">Fitness</string>
+    <string name="plan">Plan</string>
+    <string name="calculator">Calculator</string>
+    <string name="enter_your_weight_kg">Enter your weight (kg)</string>
+    <string name="enter_your_height_cm">Enter your height (cm)</string>
+    <string name="calculate">Calculate</string>
+    <string name="goals">Goals</string>
+
 </resources>
