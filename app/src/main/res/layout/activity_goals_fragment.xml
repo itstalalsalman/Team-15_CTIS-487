@@ -1,19 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
     tools:context=".GoalsFragment">
 
+    <!-- Title -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="328dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="What are your goals?"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Weight Goals Options -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Select your goal:"
+        android:textColor="@color/orange"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupGoals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/orange"
+            app:strokeWidth="1dp">
+
+            <RadioButton
+                android:id="@+id/radioLoseWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lose Weight"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:buttonTint="@color/orange"
+                android:textColor="@color/black"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/orange"
+            app:strokeWidth="1dp">
+
+            <RadioButton
+                android:id="@+id/radioGainWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gain Weight"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:buttonTint="@color/orange"
+                android:textColor="@color/black"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/orange"
+            app:strokeWidth="1dp">
+
+            <RadioButton
+                android:id="@+id/radioMaintainWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Maintain Weight"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:buttonTint="@color/orange"
+                android:textColor="@color/black"/>
+
+        </com.google.android.material.card.MaterialCardView>
+    </RadioGroup>
+
+    <!-- Subcategories for Lose/Gain Weight -->
+    <LinearLayout
+        android:id="@+id/layoutSubcategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:text="Select Weight Category:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/orange"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupWeightCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="1dp">
+
+                <RadioButton
+                    android:id="@+id/radio0_5kg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.5kg"
+                    android:textSize="16sp"
+                    android:padding="12dp"
+                    android:buttonTint="@color/orange"
+                    android:textColor="@color/black"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="1dp">
+
+                <RadioButton
+                    android:id="@+id/radio1kg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1kg"
+                    android:textSize="16sp"
+                    android:padding="12dp"
+                    android:buttonTint="@color/orange"
+                    android:textColor="@color/black"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/orange"
+                app:strokeWidth="1dp">
+
+                <RadioButton
+                    android:id="@+id/radio2kg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2kg"
+                    android:textSize="16sp"
+                    android:padding="12dp"
+                    android:buttonTint="@color/orange"
+                    android:textColor="@color/black"/>
+
+            </com.google.android.material.card.MaterialCardView>
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
