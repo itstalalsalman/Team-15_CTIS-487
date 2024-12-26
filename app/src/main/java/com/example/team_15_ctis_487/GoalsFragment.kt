@@ -1,7 +1,7 @@
 package com.example.team_15_ctis_487
 
-import NutritionViewModel
 import android.os.Bundle
+import androidx.work.Data
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.team_15_ctis_487.databinding.ActivityGoalsFragmentBinding
 import com.example.team_15_ctis_487.json.ApiClient
 import com.example.team_15_ctis_487.retrofitmodel.FitnessData
@@ -18,17 +19,29 @@ import com.example.team_15_ctis_487.retrofitmodel.Exercise
 import retrofit2.Call
 import retrofit2.Callback
 import androidx.navigation.fragment.findNavController
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import com.ctis487.workerjsondatabase.backgroundservice.CustomWorker
+import com.ctis487.workerjsondatabase.db.FitnessRoomDatabase
+import com.example.team_15_ctis_487.retrofitmodel.Meal
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class GoalsFragment : Fragment() {
     private var _binding: ActivityGoalsFragmentBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var workManager: WorkManager
+    lateinit var workRequest: OneTimeWorkRequest
     private lateinit var apiService: ApiService
     private var selectedButton: RadioButton? = null
     private var fitnessData: FitnessData? = null // Make it nullable
     private var isDataLoaded = false // Flag to check if data is loaded
-    private val nutritionViewModel: NutritionViewModel by activityViewModels() // Get the shared ViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,6 +104,7 @@ class GoalsFragment : Fragment() {
         }
 
         disableWeightCategoryRadioButtons()
+        workManager = context?.let { WorkManager.getInstance(it) }!!
 
         return binding.root
     }
@@ -137,10 +151,8 @@ class GoalsFragment : Fragment() {
                         Log.d("FILTERED_WORKOUTS", "Filtered Workouts for $userGoal${weightCategory.let { " ($it)" } ?: ""}: $workouts")
                         val nutrition = data.nutrition.lose_weight[it]
                         Log.d("FILTERED_NUTRITION", "Filtered Nutrition for $userGoal${weightCategory.let { " ($it)" } ?: ""}: $nutrition")
-                        if (nutrition != null) {
-                            nutritionViewModel.setNutritionData(nutrition)
-                        }
-                        startTrackWorkoutFragment(workouts)
+                        enqueueDataInsertion(workouts,nutrition)
+
 
                     }
                 }
@@ -150,10 +162,9 @@ class GoalsFragment : Fragment() {
                         Log.d("FILTERED_WORKOUTS", "Filtered Workouts for $userGoal${weightCategory.let { " ($it)" } ?: ""}: $workouts")
                         val nutrition = data.nutrition.gain_weight[it]
                         Log.d("FILTERED_NUTRITION", "Filtered Nutrition for $userGoal${weightCategory.let { " ($it)" } ?: ""}: $nutrition")
-                        if (nutrition != null) {
-                            nutritionViewModel.setNutritionData(nutrition)
-                        }
-                        startTrackWorkoutFragment(workouts)
+
+                        enqueueDataInsertion(workouts,nutrition)
+
 
                     }
                 }
@@ -163,38 +174,69 @@ class GoalsFragment : Fragment() {
                     Log.d("FILTERED_WORKOUTS", "Filtered Workouts for $userGoal: $workouts")
                     val nutrition = data.nutrition.maintain_weight
                     Log.d("FILTERED_NUTRITION", "Filtered Nutrition for $userGoal: $nutrition")
-                    if (nutrition != null) {
-                        nutritionViewModel.setNutritionData(nutrition)
-                    }
-                    startTrackWorkoutFragment(workouts)
+                    enqueueDataInsertion(workouts,nutrition)
                 }
             }
         } else {
             Toast.makeText(requireContext(), "Please select a goal and weight category.", Toast.LENGTH_SHORT).show()
         }
     }
+    private fun enqueueDataInsertion(workouts: List<Exercise>?, nutrition: List<Meal>?) {
+        val mealDAO = context?.let { FitnessRoomDatabase.getDatabase(it).mealDao() }
+        val exerciseDAO = context?.let { FitnessRoomDatabase.getDatabase(it).exerciseDao() }
+        lifecycleScope.launch {
+            // Fetch the current meals from the database
+            val currentMeals = withContext(Dispatchers.IO) {
+                mealDAO?.getAllMeals()
+                    ?: emptyList() // Use a safe call and provide a default empty list
+            }
+            if (!currentMeals.isEmpty()) {
+                mealDAO?.deleteAllMeals()
+                exerciseDAO?.deleteAllExercises()
+            }
 
-    private fun startTrackWorkoutFragment(workouts: List<Exercise>?) {
-        // Check if workouts is not null
-        if (workouts == null) {
-            Log.d("TRACK_WORKOUT_FRAGMENT", "Workouts data is null")
-            return
+
+            // Convert the workouts and nutrition to JSON strings
+            val workoutsJson = Gson().toJson(workouts)
+            val nutritionJson = Gson().toJson(nutrition)
+            Log.d(Utils.TAGFORLAGCAT, "Meals JSON: $nutritionJson")
+            Log.d(Utils.TAGFORLAGCAT, "Exercises JSON: $workoutsJson")
+            // Create input data for the worker
+            val inputData = Data.Builder()
+                .putString("workouts", workoutsJson)
+                .putString("nutrition", nutritionJson)
+                .build()
+
+            // Create a OneTimeWorkRequest
+            workRequest = OneTimeWorkRequest.Builder(CustomWorker::class.java)
+                .setInputData(inputData)
+                .build()
+
+            // Enqueue the work request
+            workManager.enqueue(workRequest)
+
+            // Observe the work request status
+            workManager.getWorkInfoByIdLiveData(workRequest.id)
+                .observe(viewLifecycleOwner, { workInfo ->
+                    if (workInfo != null && workInfo.state == WorkInfo.State.SUCCEEDED) {
+                        val resultData: Data = workInfo.outputData // Get output of worker
+                        Snackbar.make(
+                            binding.root,
+                            "Data insertion succeeded: " + resultData.getString("result"),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    } else if (workInfo != null && workInfo.state.isFinished) {
+                        // Handle failure case
+                        Snackbar.make(binding.root, "Data insertion failed", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
+                })
         }
-        val bundle = Bundle().apply {
-            putParcelableArrayList("workout", ArrayList(workouts)) // Ensure workouts is Parcelable
-        }
 
-        Log.d("TRACK_WORKOUT_FRAGMENT", "startTrackWorkoutFragment called")
-        // Use the parentFragmentManager to begin the transaction
-        val navController = findNavController()
 
-        // Use the NavController to navigate to the TrackWorkoutFragment
-        navController.navigate(R.id.trackWorkout, bundle)
     }
 
-
-
-    private fun handleRadioButtonClick(clickedButton: RadioButton) {
+        private fun handleRadioButtonClick(clickedButton: RadioButton) {
         // Deselect the previously selected button if it's not the same as the clicked one
         if (selectedButton != null && selectedButton != clickedButton) {
             selectedButton?.isChecked = false

@@ -18,12 +18,7 @@ class TrackWorkoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = ActivityTrackWorkoutFragmentBinding.inflate(inflater, container, false)
-        val workouts: ArrayList<Exercise>? = arguments?.getParcelableArrayList("workout")
-        if (workouts != null) {
-            Log.d("TRACK_WORKOUT_FRAGMENT", "Received workouts: $workouts")
-        } else {
-            Log.d("TRACK_WORKOUT_FRAGMENT", "No workouts data received")
-        }
+
         return binding.root
 
     }
