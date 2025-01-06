@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.team_15_ctis_487.databinding.ActivityHomeFragmentBinding // Ensure this import exists
 
 class HomeFragment : Fragment() {
@@ -21,6 +22,18 @@ class HomeFragment : Fragment() {
         binding.btnCheckBMI.setOnClickListener {
             val intent = Intent(requireContext(), BMICheckingActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnSeeLift.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_track)
+        }
+
+        binding.btnSeeNutrition.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_nutrition)
+        }
+
+        binding.btnGoToGoals.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_goal)
         }
 
         return binding.root

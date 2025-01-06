@@ -18,51 +18,56 @@
         android:layout_gravity="center"
         android:paddingBottom="16dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Exercise Name">
+        android:text="Exercise Name"
+        android:layout_marginTop="10sp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editExerciseName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter exercise name"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editExerciseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Sets">
+        android:hint="Enter exercise name"
+        android:minHeight="48dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editExerciseSets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Number of sets"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
+        android:id="@+id/textView10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Reps">
+        android:text="Sets"
+        android:layout_marginTop="20sp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editExerciseReps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Number of reps"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editExerciseSets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number of sets"
+        android:inputType="number"
+        android:minHeight="48dp" />
 
     <!-- Spinner for selecting Beginner, Intermediate, Advanced -->
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reps" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editExerciseReps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number of reps"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:layout_marginTop="20sp"/>
+
     <Spinner
         android:id="@+id/spinnerLevel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp" />
 
 </LinearLayout>

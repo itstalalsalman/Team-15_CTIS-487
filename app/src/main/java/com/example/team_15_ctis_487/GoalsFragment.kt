@@ -51,6 +51,8 @@ class GoalsFragment : Fragment() {
         apiService = ApiClient.getClient().create(ApiService::class.java)
         val request = apiService.getParentJSONObject()
 
+
+
         Log.d("CURRENCY", "Before Request")
         request.enqueue(object : Callback<FitnessData> {
             override fun onFailure(call: Call<FitnessData>, t: Throwable) {
@@ -70,36 +72,36 @@ class GoalsFragment : Fragment() {
         })
 
         // Set click listeners for individual RadioButtons
-        binding.radioLoseWeight.setOnClickListener {
+        _binding?.radioLoseWeight?.setOnClickListener {
             handleRadioButtonClick(binding.radioLoseWeight)
         }
 
-        binding.radioGainWeight.setOnClickListener {
+        _binding?.radioGainWeight?.setOnClickListener {
             handleRadioButtonClick(binding.radioGainWeight)
         }
 
-        binding.radioMaintainWeight.setOnClickListener {
+        _binding?.radioMaintainWeight?.setOnClickListener {
             handleRadioButtonClick(binding.radioMaintainWeight)
         }
 
-        binding.radio05kg.setOnClickListener {
+        _binding?.radio05kg?.setOnClickListener {
             // Deselect other buttons
-            binding.radio1kg.isChecked = false
-            binding.radio2kg.isChecked = false
+            _binding?.radio1kg?.isChecked = false
+            _binding?.radio2kg?.isChecked = false
             filterData() // Call filterData after selection
         }
 
-        binding.radio1kg.setOnClickListener {
+        _binding?.radio1kg?.setOnClickListener {
             // Deselect other buttons
-            binding.radio05kg.isChecked = false
-            binding.radio2kg.isChecked = false
+            _binding?.radio05kg?.isChecked = false
+            _binding?.radio2kg?.isChecked = false
             filterData() // Call filterData after selection
         }
 
-        binding.radio2kg.setOnClickListener {
+        _binding?.radio2kg?.setOnClickListener {
             // Deselect other buttons
-            binding.radio05kg.isChecked = false
-            binding.radio1kg.isChecked = false
+            _binding?.radio05kg?.isChecked = false
+            _binding?.radio1kg?.isChecked = false
             filterData() // Call filterData after selection
         }
 
@@ -110,15 +112,19 @@ class GoalsFragment : Fragment() {
     }
 
     private fun enableWeightCategoryRadioButtons() {
-        binding.radio05kg.isEnabled = true
-        binding.radio1kg.isEnabled = true
-        binding.radio2kg.isEnabled = true
+        _binding?.apply {
+            radio05kg.isEnabled = true
+            radio1kg.isEnabled = true
+            radio2kg.isEnabled = true
+        }
     }
 
     private fun disableWeightCategoryRadioButtons() {
-        binding.radio05kg.isEnabled = false
-        binding.radio1kg.isEnabled = false
-        binding.radio2kg.isEnabled = false
+        _binding?.apply {
+            radio05kg.isEnabled = false
+            radio1kg.isEnabled = false
+            radio2kg.isEnabled = false
+        }
     }
 
     private fun filterData() {
@@ -261,7 +267,6 @@ class GoalsFragment : Fragment() {
                 filterData() // Call filterData when maintain weight is selected
             }
         }
-
     }
 
     override fun onDestroyView() {

@@ -17,34 +17,41 @@
         android:textColor="@color/orange"
         android:layout_gravity="center"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
+        android:id="@+id/tvMealName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Meal Name">
+        android:text="Meal Name"
+        android:textSize="15sp"
+        android:textColor="@color/orange"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editMealName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:hint="Enter meal name"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editMealName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Calories">
+        android:hint="Enter meal name"
+        android:minHeight="48dp"
+        android:textColor="@android:color/black" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editMealCalories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textColor="@android:color/black"
-            android:hint="Enter calories"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/tvCalories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Calories"
+        android:textSize="15sp"
+        android:textColor="@color/orange"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editMealCalories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter calories"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColor="@android:color/black" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonUpdateMeal"

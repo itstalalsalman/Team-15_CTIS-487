@@ -46,6 +46,11 @@ class NutritionFragment : Fragment() {
         // Set up swipe to delete functionality
         setupSwipeToDelete()
 
+        binding.fabAddMeal.setOnClickListener {
+            showAddDialog() // Show the add dialog when the FAB is clicked
+        }
+
+
         return binding.root
     }
 
@@ -139,6 +144,47 @@ class NutritionFragment : Fragment() {
         dialog.show()
     }
 
+    private fun showAddDialog() {
+        // Inflate the dialog layout
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_update_meal, null)
+
+        // Create the dialog using MaterialAlertDialogBuilder
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+        // Get references to the EditText fields and button
+        val editMealName = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.editMealName)
+        val editMealCalories = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.editMealCalories)
+        val buttonAddMeal = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.buttonUpdateMeal)
+
+        // Update the button text to "Add"
+        buttonAddMeal.text = "Add"
+
+        // Handle the add button click
+        buttonAddMeal.setOnClickListener {
+            val mealName = editMealName.text.toString()
+            val mealCalories = editMealCalories.text.toString().toIntOrNull()
+
+            if (mealName.isNotBlank() && mealCalories != null) {
+                val newMeal = Meal(meal = mealName, calories = mealCalories) // Create a new Meal object
+
+                // Insert the new meal into the database
+                insertMeal(newMeal)
+
+                // Dismiss the dialog
+                dialog.dismiss()
+            } else {
+                // Handle invalid input (e.g., show a Toast)
+                Toast.makeText(context, "Please provide valid inputs", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Show the dialog
+        dialog.show()
+    }
+
     private fun updateMeal(meal: Meal) {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
@@ -147,6 +193,16 @@ class NutritionFragment : Fragment() {
             loadMeals() // Reload meals to refresh the RecyclerView
         }
     }
+
+    private fun insertMeal(meal: Meal) {
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                mealDAO.insertMeal(meal) // Insert the new meal into the database
+            }
+            loadMeals() // Reload meals to refresh the RecyclerView
+        }
+    }
+
     private fun setupSwipeToDelete() {
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(

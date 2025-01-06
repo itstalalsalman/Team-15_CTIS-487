@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
                             }
                             R.id.goals -> {
-                                secondaryIcon.visibility = View.VISIBLE
+                                secondaryIcon.visibility = View.GONE
                             }
                         }
                     }

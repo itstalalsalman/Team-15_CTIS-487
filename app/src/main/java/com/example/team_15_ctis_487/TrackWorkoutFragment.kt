@@ -1,5 +1,7 @@
 package com.example.team_15_ctis_487
 
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +28,7 @@ class TrackWorkoutFragment : Fragment() {
 
     private var _binding: ActivityTrackWorkoutFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var mediaPlayer : MediaPlayer
     private lateinit var exerciseDAO: ExerciseDAO
     private lateinit var exerciseAdapter: ExerciseAdapter
     private var exerciseList: List<Exercise> = emptyList()
@@ -45,6 +47,9 @@ class TrackWorkoutFragment : Fragment() {
 
         // Obtain DAO
         exerciseDAO = FitnessRoomDatabase.getDatabase(requireContext()).exerciseDao()
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.setDataSource("https://www.soundjay.com/nature/sounds/water-droplet-1.mp3")
+        mediaPlayer.prepare()
 
         // Set up RecyclerView
         setupRecyclerView()
@@ -54,6 +59,7 @@ class TrackWorkoutFragment : Fragment() {
 
         // Set up FloatingActionButton for inserting a new Exercise
         binding.fabAddExercise.setOnClickListener {
+            mediaPlayer.start()
             showInsertDialog()
         }
 

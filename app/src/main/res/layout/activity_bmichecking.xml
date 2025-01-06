@@ -149,18 +149,6 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 
-            <Button
-                android:id="@+id/btnGoals"
-                android:layout_marginStart="10sp"
-                android:layout_width="100sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:fontFamily="@font/inter_semibold"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
-                android:text="@string/goals"
-                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout

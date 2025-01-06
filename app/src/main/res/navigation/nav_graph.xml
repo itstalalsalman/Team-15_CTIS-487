@@ -8,7 +8,19 @@
         android:id="@+id/home"
         android:name="com.example.team_15_ctis_487.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/activity_home_fragment" />
+        tools:layout="@layout/activity_home_fragment">
+        <action
+            android:id="@+id/action_home_to_track"
+            app:destination="@id/trackWorkout" />
+
+        <action
+            android:id="@+id/action_home_to_nutrition"
+            app:destination="@id/nutrition" />
+
+        <action
+            android:id="@+id/action_home_to_goal"
+            app:destination="@id/goals" />
+    </fragment>
 
     <fragment
         android:id="@+id/trackWorkout"

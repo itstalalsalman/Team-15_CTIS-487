@@ -26,8 +26,8 @@ class BMICheckingActivity : AppCompatActivity() {
             calculateBMI()
             binding.btnCalculateBMI.visibility = View.GONE
             binding.btnClose.visibility = View.VISIBLE
-            binding.btnGoals.visibility = View.VISIBLE
         }
+
 
         binding.btnClose.setOnClickListener {
             finish()
